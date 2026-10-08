@@ -1,8 +1,8 @@
-# Day XXX — <lesson title>
+# Day 001 — Types make wrong code impossible
 
-**Date:**
-**Time spent:**
-**Energy (1–5):**
+**Date: 8/10/2026**
+**Time spent: 2hrs**
+**Energy (1–5):4**
 
 ## 1. What I learned (in my own words)
 i learned how to properly model data that has optional values based on a certain variant of the data in typescript. I equally leaned that typescript is not javascript with label but typescript let's us describe what the data will be and the compiler makes it imposible to have other states of the data.
@@ -13,27 +13,12 @@ The firlter and reduce functions confused me the most.
 
 ## 3. The error that taught me something
 ```
-function totalSuccessful(txs: Transaction[]): number{
-
-    let total = 0;
-    for ( const tx of txs) {
-        if(tx.status == "SUCCESSFUL") {
-            total += tx.amount
-            console.log(tx.reference);
-
-        };
-
-        
-    }
-    return total;
-}
+error TS2339: Property 'reference' does not exist on type 'Transaction'.
 
 ```
 What it actually meant:
 
-const sumOfSuccessful = (txs: Transaction []): number => return txs.filter(tx => tx.status === "SUCCESSFUL").reduce((accumulator, currentItem) =>{
-        return accumulator += currentItem.amount
-    },0)
+I wrote case SUCCESSFUL: without quotes, so TypeScript looked for a variable called SUCCESSFUL instead of comparing to the text "SUCCESSFUL". Narrowing never happened, so TypeScript still thought tx could be a pending transaction with no reference
 
 
 ## 4. What I'd tell a beginner
